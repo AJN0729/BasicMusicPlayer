@@ -31,6 +31,25 @@ struct ContentView: View {
                         .fontWeight(.bold)
                         .foregroundColor(.black)
                 }
+                    
+                    Button(action: {
+                        audioPlayer.pause()
+                    }) {
+                        Text("Pause")
+                            .font(.system(size: 25))
+                            .fontWeight(.bold)
+                            .foregroundColor(.black)
+                    }
+                    
+                    Button(action: {
+//                        audioPlayer.next()
+                    }) {
+                        Text("Next")
+                            .font(.system(size: 25))
+                            .fontWeight(.bold)
+                            .foregroundColor(.black)
+                    
+                }
             }
         }
     }
