@@ -6,11 +6,33 @@
 //
 
 import SwiftUI
+import AVKit
 
 struct ContentView: View {
+    
+    @State var audioPlayer: AVAudioPlayer!
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack {
+            HStack {
+                Text("Music Player")
+                    .font(.system(size: 45))
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.black)
+            }
+            
+            HStack {
+                Button(action: {
+                    audioPlayer.play()
+                }) {
+                    Text("play")
+                        .font(.system(size: 25))
+                        .fontWeight(.bold)
+                        .foregroundColor(.black)
+                }
+            }
+        }
     }
 }
 
