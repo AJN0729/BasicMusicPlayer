@@ -11,6 +11,7 @@ import AVKit
 struct ContentView: View {
     
     @State var audioPlayer: AVAudioPlayer!
+    @State var song = 1
     
     var body: some View {
         VStack {
@@ -19,17 +20,17 @@ struct ContentView: View {
                     .font(.system(size: 45))
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
-                    .foregroundColor(.black)
+                    .foregroundColor(.blue)
             }
             
             HStack {
                 Button(action: {
                     audioPlayer.play()
                 }) {
-                    Text("play")
+                    Text("Play")
                         .font(.system(size: 25))
                         .fontWeight(.bold)
-                        .foregroundColor(.black)
+                        .foregroundColor(.blue)
                 }
                     
                     Button(action: {
@@ -38,19 +39,32 @@ struct ContentView: View {
                         Text("Pause")
                             .font(.system(size: 25))
                             .fontWeight(.bold)
-                            .foregroundColor(.black)
+                            .foregroundColor(.blue)
                     }
                     
                     Button(action: {
-//                        audioPlayer.next()
+                        if self.song < 3 {
+                            self.song += 1
+                                
+                            } else {
+                                self.song = 1
+                            }
+                            let sound = Bundle.main.path(forResource: "song\(self.song)", ofType: "mp3")
+                            self.audioPlayer = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
+                            self.audioPlayer.play()
+                        
                     }) {
                         Text("Next")
                             .font(.system(size: 25))
                             .fontWeight(.bold)
-                            .foregroundColor(.black)
-                    
+                            .foregroundColor(.blue)
+                    }
                 }
             }
+        .onAppear {
+        let sound = Bundle.main.path(forResource: "song1", ofType: "mp3")
+        audioPlayer = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
+        
         }
     }
 }
@@ -58,5 +72,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+        ContentView()
+            .preferredColorScheme(.dark)
     }
 }
